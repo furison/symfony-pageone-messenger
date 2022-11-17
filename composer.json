@@ -1,0 +1,23 @@
+{
+    "name": "furison/symfony-pageone-messenger",
+    "description": "PageOne Bridge for Symfony Messenger",
+    "type": "symfony-messenger-bridge",
+    "require": {
+        "php": ">=8.0",
+        "symfony/http-client": "^5.4|^6.0",
+        "symfony/messenger": "^5.4|^6.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Furison\\SymfonyPageoneMessenger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "furison",
+            "email": "wierdgoku@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
