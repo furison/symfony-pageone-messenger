@@ -7,4 +7,13 @@ Install using composer
 `composer require furison/symfony-pageone-messenger`
 
 ## Usage
-to be written
+In config/services.yaml
+`services:
+    Furison\SymfonyPageOneMessenger\PageOneTransportFactory:
+        tags: [notifier.transport_factory]`
+
+Then configure the transport in # config/packages/messenger.yaml
+`framework:
+    messenger:
+        transports:
+            pageone: 'pageone://username:password@default?from=fromMsisdn'
