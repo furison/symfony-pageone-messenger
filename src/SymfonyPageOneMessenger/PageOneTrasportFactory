@@ -1,0 +1,34 @@
+<?php
+
+
+namespace Furison\SymfonyPageOneMessenger;
+
+use Symfony\Component\Notifier\Exception\UnsupportedSchemeException;
+use Symfony\Component\Notifier\Transport\AbstractTransportFactory;
+use Symfony\Component\Notifier\Transport\Dsn;
+
+/**
+ * @author Marcin Szepczynski <szepczynski@gmail.com>
+ */
+final class PageOneTransportFactory extends AbstractTransportFactory
+{
+    public function create(Dsn $dsn): PageOneTransport
+    {
+        $scheme = $dsn->getScheme();
+
+        if ('pageone' !== $scheme) {
+            throw new UnsupportedSchemeException($dsn, 'pageone', $this->getSupportedSchemes());
+        }
+
+        $from = $dsn->getRequiredOption('from');
+        $username = filter_var($dsn->getUser(), \FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $password = filter_var($dsn->getPassword(), \FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        return (new PageOneTransport($username, $password, $from, $this->client, $this->dispatcher));
+    }
+
+    protected function getSupportedSchemes(): array
+    {
+        return ['smsapi'];
+    }
+}
